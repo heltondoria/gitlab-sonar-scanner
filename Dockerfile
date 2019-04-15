@@ -18,4 +18,28 @@ RUN \
     ls -lha /usr/bin/sonar* && \
     ln -s /usr/bin/sonar-scanner-run.sh /usr/bin/gitlab-sonar-scanner
 
+FROM python:3.7-alpine
+
+RUN \
+    apk add --no-cache -u \
+    bash \
+    gcc \
+    make \
+    libffi-dev \
+    musl-dev \
+    musl-utils \
+    jpeg-dev \
+    freetype \
+    git \
+    openssh-client \
+    freetype-dev && \
+    python3 -m pip install -U \
+        dumb-init \
+        pip \
+        pytest \
+        pytest-cov \
+        pylint \
+        flake8
+
+
 WORKDIR /usr/bin
